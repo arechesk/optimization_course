@@ -64,10 +64,10 @@ void multiplyMat1(int **a, int **b, int **c, int size) {
 			#pragma ivdep
 //#pragma loop( ivdep ) 
 			for (int k = 0; k < size; k+=4) {
-				c[i][j] =  a[i][k] * b[j][k];
-				c[i][j] =   a[i][k+1] * b[j][k+1];
-				c[i][j] =  a[i][k+2] * b[j][k+2];
-				c[i][j] =  a[i][k+3] * b[j][k+3];
+				c[i][j] +=  a[i][k] * b[j][k];
+				c[i][j] +=  a[i][k+1] * b[j][k+1];
+				c[i][j] +=  a[i][k+2] * b[j][k+2];
+				c[i][j] +=  a[i][k+3] * b[j][k+3];
 			}
 }
 
