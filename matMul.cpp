@@ -11,8 +11,6 @@ void initMatrix(int**& a,int**& b,int**& c,int size) {
 		a[i] = new int[size];
 		b[i] = new int[size];
 		c[i] = new int[size];
-
-		#pragma ivdep
 #pragma ivdep
 		for (int j = 0; j < size; j += 4)
 		{
@@ -31,10 +29,7 @@ void initMatrix(int**& a,int**& b,int**& c,int size) {
 			c[i][j + 2] = 0;
 			c[i][j + 3] = 0;
 		}
-
-	}
-
-	
+	}	
 }
 
 int** T(int**& mat,int size) {
