@@ -84,11 +84,10 @@ void multiplyMat2(int **a, int **b, int **c, int size) {
 void multiplyMat3(int **a, int **b, int **c, int size) {
 //#pragma omp parallel for
 	for (int i = 0; i < size; i+=16)
-		for (int j = 0; j < size; j++)
+		for (int k = 0; k < size; k++)
+			{for (int j = 0; j < size; j++)
 		{
-#pragma ivdep
-			for (int k = 0; k < size; k++)
-			{
+			
 				c[i][j] += a[i][k] * b[k][j];
 				c[i+1][j] += a[i+1][k] * b[k][j];
 				c[i+2][j] += a[i+2][k] * b[k][j];
