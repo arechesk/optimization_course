@@ -27,6 +27,26 @@ icl -Wall -Qopenmp ./matMul.cpp -o L3_miss
 # Как эту проблему починить
 Можно реализовать блочный алгоритм перемножения матриц, при использование блочного алгоритма локальность доступа к памяти возрастает, что и приводит уменьшению количества кэш-промахов. 
 
+-
+    ``` c++ 
+    
+    void multiplyMat1(int *a, int *b, int *c, int size) {
+	  int bSize = 64;
+	  int cell =size / bSize;
+	  for (int jk = 0; jk < cell; jk++) 
+		  for (int ik = 0; ik < cell; ik++) 
+			  for (int j = jk * bSize; j < jk * bSize + bSize; j++)
+				  for (int k = ik * bSize; k < ik * bSize + bSize; k++) {
+					  int A = a[j*size+k];
+					  int j_size = j*size, k_size = k*size;
+					  for (int i = 0; i < size; i++) {
+						  c[j_size+i] += A * b[k_size+i];
+					  }
+				  }
+      }
+      
+      
+
 
 # Результат
 Испытания проводились на компьютере с процессором Intel i5 ivyBridge, L1-128Kb, L2-512Kb, L3-3Mb
